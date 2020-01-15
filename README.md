@@ -1,0 +1,2 @@
+# Tucil-Stima
+tugas "kecil"
