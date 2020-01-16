@@ -1,0 +1,1 @@
+g++ -o a solveNdraw.cpp -I/usr/include/python2.7 -lpython2.7

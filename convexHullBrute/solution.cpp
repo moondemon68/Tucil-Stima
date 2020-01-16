@@ -12,7 +12,7 @@
 using namespace std;
 // namespace plt = matplotlibcpp;
 
-const int MAXN = 1000;
+const int MAXN = 2500;
 int n;
 point p[MAXN + 5];
 set<point> hullPoints;

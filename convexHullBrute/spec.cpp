@@ -18,14 +18,14 @@ protected:
     }
 
     void GradingConfig() {
-        TimeLimit(1);
+        TimeLimit(100);
         MemoryLimit(64);
     }
 
     void Constraints() {
-        CONS(1 <= N && N <= 1000);
-        CONS(eachElementBetween(X, -1e9, 1e9));
-        CONS(eachElementBetween(Y, -1e9, 1e9));
+        CONS(1 <= N && N <= 2500);
+        CONS(eachElementBetween(X, -1000, 1000));
+        CONS(eachElementBetween(Y, -1000, 1000));
     }
 
 private:
@@ -63,12 +63,12 @@ protected:
     }
 
     void TestCases() {
-        CASE(N = 5, randomPoints(-10, 10));
-        CASE(N = 10, randomPoints(-50, 50));
-        CASE(N = 20, randomPoints(-100, 100));
-        CASE(N = 100, randomPoints(-1e9, 1e9));
-        CASE(N = 500, randomPoints(-1e9, 1e9));
-        CASE(N = 1000, randomPoints(-1e9, 1e9));
+        CASE(N = 5, randomPoints(-1000, 1000));
+        CASE(N = 10, randomPoints(-1000, 1000));
+        CASE(N = 20, randomPoints(-1000, 1000));
+        CASE(N = 100, randomPoints(-1000, 1000));
+        CASE(N = 500, randomPoints(-1000, 1000));
+        CASE(N = 2500, randomPoints(-1000, 1000));
     }
 
 private:

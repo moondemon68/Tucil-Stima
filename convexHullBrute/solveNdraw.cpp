@@ -10,7 +10,7 @@
 using namespace std;
 namespace plt = matplotlibcpp;
 
-const int MAXN = 1000;
+const int MAXN = 2500;
 int n;
 point p[MAXN + 5];
 set<point> hullPoints;
@@ -51,7 +51,7 @@ void draw () {
 
 int main () {
     // for file input uncomment the line below
-    // ifstream cin("tc/convexHullBrute_5.in");
+    ifstream cin("tc/convexHullBrute_6.in");
     // INPUT
     cin >> n;
     for (int i=1;i<=n;i++) cin >> p[i].x >> p[i].y;
@@ -75,7 +75,7 @@ int main () {
             }
         }
     }
-    cerr << "Time needed: " << fixed << setprecision(3) << (clock()-start)*1./CLOCKS_PER_SEC << endl;
+    cerr << "Time needed: " << fixed << setprecision(5) << (clock()-start)*1./CLOCKS_PER_SEC << endl;
     
     // OUTPUT
     cout << "There are " << hullPoints.size() << " points in the convex hull:" << endl;
