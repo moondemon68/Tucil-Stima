@@ -18,9 +18,9 @@ vector<pair<point, point>> hullSegments;
 
 // Given line that goes from point a to b. Returns 1 if point c is located on one side of the line, 0 if it is on the line, and -1 if it is on the other side.
 int position (point a, point b, point c) {
-    double x = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-    if (x < 0) return -1;
-    else if (x == 0) return 0;
+    double ret = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    if (ret < 0) return -1;
+    else if (ret == 0) return 0;
     else return 1;
 }
 
