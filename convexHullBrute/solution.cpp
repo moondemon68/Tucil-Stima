@@ -12,10 +12,10 @@
 using namespace std;
 // namespace plt = matplotlibcpp;
 
-const int MAXN = 500;
+const int MAXN = 1000;
 int n;
 point p[MAXN + 5];
-vector<point> hullPoints;
+set<point> hullPoints;
 vector<pair<point, point>> hullSegments;
 
 // Given line that goes from point a to b. Returns 1 if point c is located on one side of the line, 0 if it is on the line, and -1 if it is on the other side.
@@ -66,7 +66,7 @@ int main () {
                 } 
             }
             if (oneside) {
-                hullPoints.pb(p[i]);
+                hullPoints.insert(p[i]);
                 hullSegments.pb(mp(p[i], p[j]));
             }
         }
@@ -74,7 +74,7 @@ int main () {
     cerr << "Time needed: " << fixed << setprecision(3) << (clock()-start)*1./CLOCKS_PER_SEC << endl;
     
     // OUTPUT
-    cout << "There are " << hullPoints.size() << " points in the convex hull:" << endl;
+    cout << hullPoints.size() << endl;
     for (auto p : hullPoints) {
         cout << p.x << " " << p.y << endl;
     }

@@ -5,17 +5,15 @@
 #define y second
 #define pb push_back
 #define mp make_pair
-#define MOD 1000000007
 #define point pair<double, double>
-#define LL long long
 
 using namespace std;
 namespace plt = matplotlibcpp;
 
-const int MAXN = 500;
+const int MAXN = 1000;
 int n;
 point p[MAXN + 5];
-vector<point> hullPoints;
+set<point> hullPoints;
 vector<pair<point, point>> hullSegments;
 
 // Given line that goes from point a to b. Returns 1 if point c is located on one side of the line, 0 if it is on the line, and -1 if it is on the other side.
@@ -28,13 +26,16 @@ int position (point a, point b, point c) {
 
 // Draw the graph
 void draw () {
+    // Initialize picture area to 1200x780 pixels
     plt::figure_size(1200, 780);
+    // Draw the dots
     vector<double> px, py;
     for (int i=1;i<=n;i++) {
         px.pb(p[i].x);
         py.pb(p[i].y);
     }
-    plt::scatter(px, py);
+    plt::scatter(px, py, 10);
+    // Draw the lines
     for (auto p : hullSegments) {
         px.clear();
         py.clear();
@@ -42,12 +43,14 @@ void draw () {
         py.pb(p.first.y);
         px.pb(p.second.x);
         py.pb(p.second.y);
-        plt::plot(px, py);
+        plt::plot(px, py, {{"color", "red"}});
     }
+    // Show the graph
     plt::show();
 }
 
 int main () {
+    ifstream cin("tc/convexHullBrute_5.in");
     // INPUT
     cin >> n;
     for (int i=1;i<=n;i++) cin >> p[i].x >> p[i].y;
@@ -66,7 +69,7 @@ int main () {
                 } 
             }
             if (oneside) {
-                hullPoints.pb(p[i]);
+                hullPoints.insert(p[i]);
                 hullSegments.pb(mp(p[i], p[j]));
             }
         }
@@ -76,7 +79,7 @@ int main () {
     // OUTPUT
     cout << "There are " << hullPoints.size() << " points in the convex hull:" << endl;
     for (auto p : hullPoints) {
-        cout << p.x << " " << p.y << endl;
+        cout << fixed << setprecision(5) << p.x << " " << p.y << endl;
     }
     draw();
     return 0;
