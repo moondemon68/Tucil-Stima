@@ -50,7 +50,8 @@ void draw () {
 }
 
 int main () {
-    ifstream cin("tc/convexHullBrute_5.in");
+    // for file input uncomment the line below
+    // ifstream cin("tc/convexHullBrute_5.in");
     // INPUT
     cin >> n;
     for (int i=1;i<=n;i++) cin >> p[i].x >> p[i].y;
