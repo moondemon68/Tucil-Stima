@@ -1,3 +1,12 @@
+/*
+How to compile:
+1. Make sure you are using linux
+2. Install matplotlib-cpp requirements -> sudo apt-get install python-matplotlib python-numpy python2.7-dev
+3. g++ -o a solveNdraw.cpp -I/usr/include/python2.7 -lpython2.7
+
+How to run:
+./a
+*/
 #include <bits/stdc++.h>
 #include "matplotlibcpp.h"
 
@@ -5,12 +14,12 @@
 #define y second
 #define pb push_back
 #define mp make_pair
-#define point pair<double, double>
+#define point pair<int, int>
 
 using namespace std;
 namespace plt = matplotlibcpp;
 
-const int MAXN = 2500;
+const int MAXN = 10000;
 int n;
 point p[MAXN + 5];
 set<point> hullPoints;
@@ -50,11 +59,17 @@ void draw () {
 }
 
 int main () {
-    // for file input uncomment the line below
-    ifstream cin("tc/convexHullBrute_6.in");
     // INPUT
+    cout << "Masukkan N: ";
     cin >> n;
-    for (int i=1;i<=n;i++) cin >> p[i].x >> p[i].y;
+    mt19937 mt_rand(13518093);
+    uniform_int_distribution<int> distribution(-1000,1000);
+    for (int i=1;i<=n;i++) {
+        p[i].x = distribution(mt_rand);
+        p[i].y = distribution(mt_rand);
+    }
+    cout << "Generated points: " << endl;
+    for (int i=1;i<=n;i++) cout << p[i].x << " " << p[i].y << endl;
 
     // PROCESS
     clock_t start = clock();    // start timer
