@@ -1,6 +1,7 @@
 #ifndef __POLINOM_H__
 #define __POLINOM_H__
 
+#include "global.h"
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -10,6 +11,7 @@ struct Polinom {
     vector<int> v;
     Polinom(int n);
     Polinom& operator=(const Polinom& P);
+    void GeneratePolinom(int seed);
     void InputPolinom();
     void PrintPolinom();
 };
