@@ -1,13 +1,13 @@
 #include "global.h"
-#include "Polinom.h"
+#include "PolinomDNC.h"
 
-Polinom::Polinom(int n) {
+PolinomDNC::PolinomDNC(int n) {
     derajat = n;
     v.resize(n+1);
     for (int i=0;i<=derajat;i++) v[i] = 0;
 }
 
-Polinom& Polinom::operator=(const Polinom& P) {
+PolinomDNC& PolinomDNC::operator=(const PolinomDNC& P) {
     derajat = P.derajat;
     for (int i=0;i<=derajat;i++) {
         v[i] = P.v[i];
@@ -15,7 +15,7 @@ Polinom& Polinom::operator=(const Polinom& P) {
     return *this;
 }
 
-void Polinom::GeneratePolinom(int seed) {
+void PolinomDNC::GeneratePolinom(int seed) {
     mt19937 mt_rand(seed);
     uniform_int_distribution<int> distribution(-1000,1000);
     for (int i=0;i<=derajat;i++) {
@@ -23,11 +23,11 @@ void Polinom::GeneratePolinom(int seed) {
     }
 }
 
-void Polinom::InputPolinom() {
+void PolinomDNC::InputPolinom() {
     for (int i=0;i<=derajat;i++) cin >> v[i];
 }
 
-void Polinom::PrintPolinom() {
+void PolinomDNC::PrintPolinom() {
     for (int i=0;i<=derajat;i++) {
         if (i > 0 && v[i] >= 0) cout << " + ";
         if (v[i] < 0) cout << " - ";
@@ -37,8 +37,8 @@ void Polinom::PrintPolinom() {
     }
 }
 
-Polinom bruteMultiply(Polinom A, Polinom B) {
-    Polinom C(A.derajat + B.derajat);
+PolinomDNC bruteMultiply(PolinomDNC A, PolinomDNC B) {
+    PolinomDNC C(A.derajat + B.derajat);
     for (int i=0;i<=A.derajat;i++) {
         for (int j=0;j<=B.derajat;j++) {
             C.v[i+j] += A.v[i]*B.v[j];
@@ -49,8 +49,8 @@ Polinom bruteMultiply(Polinom A, Polinom B) {
     return C;
 }
 
-Polinom add(Polinom A, Polinom B) {
-    Polinom C(max(A.derajat, B.derajat));
+PolinomDNC add(PolinomDNC A, PolinomDNC B) {
+    PolinomDNC C(max(A.derajat, B.derajat));
     for (int i=0;i<=A.derajat;i++) {
         C.v[i] = A.v[i];
     }
@@ -61,8 +61,8 @@ Polinom add(Polinom A, Polinom B) {
     return C;
 }
 
-Polinom sub(Polinom A, Polinom B) {
-    Polinom C(max(A.derajat, B.derajat));
+PolinomDNC sub(PolinomDNC A, PolinomDNC B) {
+    PolinomDNC C(max(A.derajat, B.derajat));
     for (int i=0;i<=A.derajat;i++) {
         C.v[i] = A.v[i];
     }
@@ -73,16 +73,16 @@ Polinom sub(Polinom A, Polinom B) {
     return C;
 }
 
-Polinom dncMultiply(Polinom A, Polinom B) {
+PolinomDNC dncMultiply(PolinomDNC A, PolinomDNC B) {
     // Kenapa 2? Karena 1/2-1 = -1 (Out of bounds)
     if (A.derajat <= 2) {
-        Polinom C = bruteMultiply(A, B);
+        PolinomDNC C = bruteMultiply(A, B);
         return C;
     }
-    Polinom A0(A.derajat/2-1);
-    Polinom A1(A.derajat - A.derajat/2);
-    Polinom B0(B.derajat/2-1);
-    Polinom B1(B.derajat - B.derajat/2);
+    PolinomDNC A0(A.derajat/2-1);
+    PolinomDNC A1(A.derajat - A.derajat/2);
+    PolinomDNC B0(B.derajat/2-1);
+    PolinomDNC B1(B.derajat - B.derajat/2);
 
     for (int i=0;i<=A0.derajat;i++) {
         A0.v[i] = A.v[i];
@@ -97,13 +97,13 @@ Polinom dncMultiply(Polinom A, Polinom B) {
         B1.v[i-B.derajat/2] = B.v[i];
     }
 
-    Polinom X = dncMultiply(add(A0, A1), add(B0, B1));
-    Polinom Y = dncMultiply(A0, B0);
-    Polinom Z = dncMultiply(A1, B1);
+    PolinomDNC X = dncMultiply(add(A0, A1), add(B0, B1));
+    PolinomDNC Y = dncMultiply(A0, B0);
+    PolinomDNC Z = dncMultiply(A1, B1);
 
-    Polinom V = sub(sub(X, Y), Z);
+    PolinomDNC V = sub(sub(X, Y), Z);
 
-    Polinom Ret(A.derajat + B.derajat);
+    PolinomDNC Ret(A.derajat + B.derajat);
     for (int i=0;i<=Y.derajat;i++) {
         Ret.v[i] = Y.v[i];
     }

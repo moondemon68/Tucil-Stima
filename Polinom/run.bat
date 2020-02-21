@@ -1,2 +1,2 @@
-g++ -o a *.cpp
+g++ -o a main.cpp PolinomBF.cpp PolinomDNC.cpp global.cpp
 .\a
