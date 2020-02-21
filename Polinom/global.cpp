@@ -1,4 +1,4 @@
 #include "global.h"
 
-int addOp = 0;
-int mulOp = 0;
+long long int addOp = 0;
+long long int mulOp = 0;
