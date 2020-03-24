@@ -12,5 +12,6 @@ src > solve.py
 # How to run:
 ```
 python solve.py
-When prompted, input the __relative path__ of the file.
 ```
+When prompted, input the __relative path__ of the file.
+Example: ../test/yes1.in
