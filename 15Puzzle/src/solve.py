@@ -9,7 +9,7 @@ pq = []
 # priority queue yang isinya tuple <cost, distanceFromRoot, node, moves, puzzle>. 
 visited = []
 # berisi state puzzle yang sudah pernah dikunjungi
-nodeNumber = 2  
+nodeNumber = 1  
 # nomor node yang akan diambil anak baru
 di = [-1, 0, 1, 0]
 # list movement up/down
@@ -69,8 +69,8 @@ def generateChild(currentState):
             puzzle[findi][findj], puzzle[newi][newj] = puzzle[newi][newj], puzzle[findi][findj]
             if (puzzle not in visited):
                 cost = countCostG(puzzle) + distanceFromRoot
-                childStates.append((cost, distanceFromRoot, nodeNumber, moves + move[i], deepcopy(puzzle)))
                 nodeNumber += 1
+                childStates.append((cost, distanceFromRoot, nodeNumber, moves + move[i], deepcopy(puzzle)))
             puzzle[findi][findj], puzzle[newi][newj] = puzzle[newi][newj], puzzle[findi][findj]
     
     return childStates
